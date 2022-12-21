@@ -1,6 +1,7 @@
 import requests
 import csv
 from bs4 import BeautifulSoup as BS
+from datetime import date
 
 
 def get_html(url):
@@ -37,7 +38,8 @@ def get_data(soup):
 
 
 def main():
-    BASE_URL = "https://kaktus.media/?lable=8&date=2022-12-21&order=time"
+    current = date.today()
+    BASE_URL = f"https://kaktus.media/?lable=8&date={current}&order=time"
     html = get_html(BASE_URL)
     soup = get_soup(html)
     get_data(soup)
