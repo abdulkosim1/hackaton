@@ -6,16 +6,16 @@ from main import *
 bot = telebot.TeleBot(token)
 main()
 keyboard = telebot.types.ReplyKeyboardMarkup()
-button1 = telebot.types.KeyboardButton('News')
+# button1 = telebot.types.KeyboardButton('Quit')
 button2 = telebot.types.KeyboardButton('Description')
 button3 = telebot.types.KeyboardButton('Photo')
-keyboard.add(button1)
+# keyboard.add(button1)
 show = keyboard.add(button2,button3)
 
 
 @bot.message_handler(commands=['start'])
 def start_dunction(message):    
-    bot.send_message(message.chat.id, 'Здраствуйте',reply_markup=keyboard)
+    bot.send_message(message.chat.id, 'Здраствуйте, введите news чтобы увидеть все новости',reply_markup=show)
     bot.register_next_step_handler(message,get_news)
     
 def get_news(message):
@@ -28,8 +28,10 @@ def get_news(message):
 
 def start_game(message):
     if button2:
-        msg = bot.send_message(message.chat.id, 'Введите индекс ')
+        bot.send_message(message.chat.id, 'Введите индекс ')
         bot.register_next_step_handler(message,news_open)
+    # elif button1:
+    #     bot.send_message(message.chat.id, '“До свидания')
 
 
 def news_open(message):
